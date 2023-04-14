@@ -29,7 +29,7 @@ class _LoginViewState extends State<LoginView> {
             SizedBox (
             width: 128,
             height: 128,
-            child: Image.asset("../assets/logo_unaerp_rounded.png",),
+            child: Image.asset("assets/logo_unaerp_rounded.png",),
             ),
 
             const SizedBox (
@@ -46,6 +46,25 @@ class _LoginViewState extends State<LoginView> {
                   fontSize: 20,
                 )
               ),
+              validator: (value) {
+                if(value?.isEmpty ?? true) {
+                  return 'Por favor, insira seu e-mail';
+                }
+                if(value != null && !value.endsWith('@sou.unaerp.edu.br') && !value.endsWith('@unaerp.com')) {
+                  WidgetsBinding.instance!.addPostFrameCallback((_) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Por favor, insira um e-mail institucional válido'),
+                      ),
+                    );
+                  });
+                  return 'Por favor, insira seu e-mail institucional válido';
+                }
+                return null;
+              },
+              onSaved: (value) {
+                
+              },
             ),
 
             const SizedBox (
@@ -75,12 +94,12 @@ class _LoginViewState extends State<LoginView> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 child: const Text(
-                  "Recuperar senha",
-                  style: TextStyle(color: Colors.black),
+                  "Esqueceu a senha?",
+                  //style: TextStyle(color: Colors.black),
                 ),
                 
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, 'esqueceu_senha');
+                  Navigator.pushNamed(context, 'esqueceu_senha');
                 },
               ),
             ),
@@ -99,7 +118,7 @@ class _LoginViewState extends State<LoginView> {
               child: SizedBox.expand(
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, 'principal');
+                    Navigator.pushNamed(context, 'principal');
                   },
                   child: const Text(
                     "Login",
@@ -113,24 +132,51 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
             ),
-
+            Expanded(
+              child: SizedBox(
+                height: 40,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text('Ainda não tem conta?', textAlign: TextAlign.center,),
+                    TextButton(
+                      child: const Text(
+                        "Cadastre-se",
+                        textAlign: TextAlign.center,
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'cadastro');
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            /*
             const SizedBox (
               height: 10,
             ),
 
-            Container(
+            SizedBox(
               height: 40,
-              child: TextButton(
-                child: const Text(
-                  "Cadastre-se",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black),
-                ),
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, 'cadastro');
-                },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget> [
+                  const Text('Ainda não tem conta?', textAlign: TextAlign.center,),
+                  TextButton(
+                    child: const Text(
+                      "Cadastre-se",
+                      textAlign: TextAlign.center,
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'cadastro');
+                    },
+                  ),
+                ]
               ),
-            )
+                
+            ),*/
+            
           ],
         ),
       ));

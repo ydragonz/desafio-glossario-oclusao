@@ -13,7 +13,7 @@ class _PrincipalViewState extends State<PrincipalView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Teste principal'),
+        backgroundColor: Color.fromARGB(255, 14, 82, 199),
       ),
     );
   }

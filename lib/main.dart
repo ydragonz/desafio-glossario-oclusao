@@ -1,4 +1,4 @@
-import 'dart:js';
+
 
 import 'package:flutter/material.dart';
 
@@ -11,6 +11,11 @@ void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     title: 'Glossario de Oclusao',
+    /*theme: ThemeData(
+      appBarTheme: const AppBarTheme(
+        color: Color.fromARGB(255, 41, 109, 228),
+      )
+    ),*/
     initialRoute: 'login',
     routes: {
       'principal': (context) => const PrincipalView(),
@@ -18,5 +23,6 @@ void main() {
       'cadastro': (context) => const CadastroView(),
       'esqueceu_senha': (context) => const EsqueceuSenhaView(),
     },
+    home: const LoginView(),
   ));
 }

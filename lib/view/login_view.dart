@@ -132,6 +132,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
             ),
+            
             Expanded(
               child: SizedBox(
                 height: 40,

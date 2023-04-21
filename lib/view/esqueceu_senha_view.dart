@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+//import 'package:flutter/services.dart';
 
 class EsqueceuSenhaView extends StatefulWidget {
+  
   const EsqueceuSenhaView({super.key});
 
   @override
@@ -8,6 +10,7 @@ class EsqueceuSenhaView extends StatefulWidget {
 }
 
 class _EsqueceuSenhaViewState extends State<EsqueceuSenhaView> {
+  
   @override
   Widget build(BuildContext context) {
 
@@ -32,7 +35,7 @@ class _EsqueceuSenhaViewState extends State<EsqueceuSenhaView> {
             ),
 
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
 
             const Text(
@@ -54,7 +57,59 @@ class _EsqueceuSenhaViewState extends State<EsqueceuSenhaView> {
                 fontWeight: FontWeight.w400,
               ),
               textAlign: TextAlign.center,
-            )
+            ),
+
+            const SizedBox(
+              height: 20,
+            ),
+
+            TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                labelText: "E-mail",
+                labelStyle: TextStyle(
+                  color: Colors.black38,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                ),
+              ),
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+            ),
+
+            const SizedBox(
+              height: 10,
+            ),
+
+            Container(
+              height: 60,
+              alignment: Alignment.centerLeft,
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 41, 109, 228),
+                borderRadius: BorderRadius.all(Radius.circular(10),),
+              ),
+              child: SizedBox.expand(
+                child: TextButton(
+                  onPressed: () {
+                    var snackBar = const SnackBar(content: Text('E-mail enviado!'));
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    "Enviar",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  )
+                  
+                ),
+              ),
+            ),
+
+            
           ],
         )
       )

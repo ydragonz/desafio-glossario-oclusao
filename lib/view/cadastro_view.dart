@@ -9,11 +9,11 @@ class CadastroView extends StatefulWidget {
 }
 
 class _CadastroViewState extends State<CadastroView> {
-  final _formKey = GlobalKey<FormState>();
+  /*final _formKey = GlobalKey<FormState>();
 
   String? _nome;
   String? _matricula;
-  String? _email;
+  String? _email;*/
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,128 @@ class _CadastroViewState extends State<CadastroView> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 14, 82, 199),
       ),
-      body: Padding(
+
+      body: Container(
+        padding: const EdgeInsets.only(
+          top: 40,
+          left: 40,
+          right: 40,
+        ),
+
+        child: ListView(
+          children: <Widget>[
+            SizedBox(
+              width: 100,
+              height: 100,
+              child: Image.asset("assets/user_icon.png"),
+            ),
+
+            const SizedBox(
+              height: 40,
+            ),
+
+            TextFormField(
+              keyboardType: TextInputType.text,
+              decoration: const InputDecoration(
+                labelText: "Nome",
+                labelStyle: TextStyle(
+                  color: Colors.black38,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                ),
+              ),
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+            ),
+
+            const SizedBox(
+              height: 10,
+            ),
+
+            TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                labelText: "E-mail",
+                labelStyle: TextStyle(
+                  color: Colors.black38,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                ),
+              ),
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+            ),
+
+            const SizedBox(
+              height: 10,
+            ),
+
+            TextFormField(
+              keyboardType: TextInputType.text,
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: "Senha",
+                labelStyle: TextStyle(
+                  color: Colors.black38,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                ),
+              ),
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+            ),
+
+            const SizedBox(
+              height: 30,
+            ),
+
+            Container(
+              height: 60,
+              alignment: Alignment.centerLeft,
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 41, 109, 228),
+                borderRadius: BorderRadius.all(Radius.circular(10),),
+              ),
+              child: SizedBox.expand(
+                child: TextButton(
+                  onPressed: () {
+                    var snackBar = const SnackBar(content: Text('Usuário cadastrado!'));
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    "Enviar",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  )
+                  
+                ),
+              ),
+            ),
+
+            
+          ],
+        )
+      )
+
+
+
+
+
+
+
+
+
+
+
+
+      /*body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
@@ -91,11 +212,11 @@ class _CadastroViewState extends State<CadastroView> {
             ],
           ),
         ),
-      ),
+      ),*/
     );
   }
 
-  void _submitForm() {
+  /*void _submitForm() {
     final form = _formKey.currentState;
     if (form != null && form.validate()) {
       form.save();
@@ -103,5 +224,5 @@ class _CadastroViewState extends State<CadastroView> {
       // Aqui você pode realizar a lógica de cadastro do usuário
       print('Nome: $_nome, Matrícula: $_matricula, E-mail: $_email');
     }
-  }
+  }*/
 }

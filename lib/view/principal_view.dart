@@ -10,11 +10,134 @@ class PrincipalView extends StatefulWidget {
 class _PrincipalViewState extends State<PrincipalView> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 14, 82, 199),
+        backgroundColor: const Color.fromARGB(255, 14, 82, 199),
+        leading: IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () {
+            Navigator.of(context).pop();
+            logout();
+          }, 
+        ),
+        title: const Text("Glossário de Oclusão"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search), 
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: CustomSearchDelegate()
+              );
+            }
+          ),
+        ],
       ),
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/unaerp_background.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child:
+          //Image.asset("assets/logo_unaerp_rounded.png"),
+          Center(
+            child: Container(
+              width: 325,
+              height: 150,
+              decoration: const BoxDecoration(
+                
+                color: Colors.black54,
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: 
+                const Center(
+                  child: 
+                    Text(
+                      "Bem-vindo de volta (usuario)!",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                      ),
+                    ),
+                )
+                
+              
+            ),
+          ),
+          
+      ),
+    );
+  }
+}
+
+logout() {
+  // Codigo para realizar logout será implementado aqui.
+}
+
+class CustomSearchDelegate extends SearchDelegate {
+  List<String> searchTerms = [
+    'Relação Cêntrica (RC)',
+    'Espaço Funcional Livre (EFL)',
+    'Máxima Intercuspidação Habitual (MIH)',
+  ];
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      ),
+    ];
+  }
+
+  @override 
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) =>//{
+    Center(
+      child: Text(
+        query,
+        style: const TextStyle(fontSize: 64, fontWeight: FontWeight.bold),
+      ),
+    );
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> matchQuery = [];
+    for (var term in searchTerms) {
+      if(term.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(term);
+      }
+    }
+    return ListView.builder(
+      itemCount: matchQuery.length,
+      itemBuilder: (context, index) {
+        var result = matchQuery[index];
+
+        return ListTile(
+          title: Text(result),
+          onTap: () {
+            query = result;
+            showResults(context);
+          },
+        );
+      },
     );
   }
 }

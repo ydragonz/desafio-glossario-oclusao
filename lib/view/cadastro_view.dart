@@ -19,7 +19,7 @@ class _CadastroViewState extends State<CadastroView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 14, 82, 199),
+        backgroundColor: const Color.fromARGB(255, 14, 82, 199),
       ),
 
       body: Container(
@@ -130,17 +130,6 @@ class _CadastroViewState extends State<CadastroView> {
           ],
         )
       )
-
-
-
-
-
-
-
-
-
-
-
 
       /*body: Padding(
         padding: const EdgeInsets.all(16.0),

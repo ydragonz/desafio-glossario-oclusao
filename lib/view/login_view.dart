@@ -27,9 +27,9 @@ class _LoginViewState extends State<LoginView> {
           children: <Widget>[
 
             SizedBox (
-            width: 128,
-            height: 128,
-            child: Image.asset("assets/logo_unaerp_rounded.png",),
+              width: 128,
+              height: 128,
+              child: Image.asset("assets/logo_unaerp_rounded.png",),
             ),
 
             const SizedBox (

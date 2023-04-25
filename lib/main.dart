@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'view/principal_view.dart';
 import 'view/login_view.dart';
@@ -8,14 +9,11 @@ import 'view/cadastro_view.dart';
 import 'view/esqueceu_senha_view.dart';
 
 void main() {
+
+
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     title: 'Glossario de Oclusao',
-    /*theme: ThemeData(
-      appBarTheme: const AppBarTheme(
-        color: Color.fromARGB(255, 41, 109, 228),
-      )
-    ),*/
     initialRoute: 'login',
     routes: {
       'principal': (context) => const PrincipalView(),

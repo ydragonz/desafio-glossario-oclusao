@@ -16,7 +16,7 @@ class _EsqueceuSenhaViewState extends State<EsqueceuSenhaView> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 14, 82, 199),
+        backgroundColor: const Color.fromARGB(255, 14, 82, 199),
       ),
 
       body: Container(

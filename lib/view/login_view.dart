@@ -21,14 +21,26 @@ class _LoginViewState extends State<LoginView> {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(top: 60, left: 40, right: 40,),
-        //color: Color.fromARGB(255, 41, 109, 228),
         color: Colors.white10,
         child: ListView(
           children: <Widget>[
 
-            SizedBox (
+            Container (
               width: 128,
               height: 128,
+              
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 2,
+                    offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+
               child: Image.asset("assets/logo_unaerp_rounded.png",),
             ),
 

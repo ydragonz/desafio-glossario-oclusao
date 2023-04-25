@@ -109,12 +109,30 @@ class CustomSearchDelegate extends SearchDelegate {
   }
 
   @override
-  Widget buildResults(BuildContext context) =>//{
-    Center(
-      child: Text(
-        query,
-        style: const TextStyle(fontSize: 64, fontWeight: FontWeight.bold),
+  Widget buildResults(BuildContext context) =>
+    Padding(
+      padding: const EdgeInsets.only(
+        top: 30,
+        left: 20,
+        right: 20,
       ),
+      child: Column(
+        children: [
+          Text(
+            query,
+            style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox (
+            height: 20,
+          ),
+          Text(
+            query, // Atualizar para passar a descricao.
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        ],
+      )
+      
+      
     );
 
   @override

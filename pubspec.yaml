@@ -36,6 +36,15 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   fluttertoast: ^8.2.1
+  flutter_native_splash: ^2.2.4
+
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+  
+  background_image: "assets/unaerp_background_splash.png"
+  image: "assets/logo_unaerp_rounded_splash.png"
 
 dev_dependencies:
   flutter_test:
@@ -65,9 +74,11 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/logo_unaerp_rounded.png
+    - assets/logo_unaerp_rounded_splash.png
     - assets/password_reset_icon.png
     - assets/user_icon.png
     - assets/unaerp_background.jpg
+    - assets/unaerp_background_splash.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

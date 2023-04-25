@@ -19,7 +19,7 @@ class _CadastroViewState extends State<CadastroView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 14, 82, 199),
+        backgroundColor: const Color(0xFF0E52C7),
       ),
 
       body: Container(
@@ -209,9 +209,6 @@ class _CadastroViewState extends State<CadastroView> {
     final form = _formKey.currentState;
     if (form != null && form.validate()) {
       form.save();
-
-      // Aqui você pode realizar a lógica de cadastro do usuário
-      print('Nome: $_nome, Matrícula: $_matricula, E-mail: $_email');
     }
   }*/
 }

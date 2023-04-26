@@ -80,11 +80,11 @@ logout() {
 }
 
 class CustomSearchDelegate extends SearchDelegate {
-  List<String> searchTerms = [
-    'Relação Cêntrica (RC)',
-    'Espaço Funcional Livre (EFL)',
-    'Máxima Intercuspidação Habitual (MIH)',
-  ];
+  Map<String, String> searchTerms = {
+    'Relação Cêntrica (RC)': 'Relacionamento maxilomandibular independente do contato dentário, no qual os côndilos se articulam na posição anterossuperior contra as inclinações posteriores das eminências articulares. Nesta posição, a mandíbula realiza apenas um movimento de rotação. A partir desta posição fisiológica, de relação maxilomandibular, o paciente pode realizar movimentos laterais, verticais ou protrusivos. Clinicamente é uma posição de referência útil e repetível. Portanto, a RC é uma posição condilar que independe dos contatos dentários.',
+    'Espaço Funcional Livre (EFL)': 'É a distância entre os dentes antagonistas quando a mandíbula está em posição de repouso postural. É a diferença entre a dimensão vertical de repouso e a de oclusão e apresenta valores médios de 3 mm. O Glossário de termos protéticos, em sua 9ª edição (GPT-9, 2017) conceitua esse espaço como Espaço de Repouso Interoclusal (IORS – interoclusal rest space).',
+    'Máxima Intercuspidação Habitual (MIH)': 'Posição de intercuspidação completa dos dentes opostos, independentemente da posição condilar. Às vezes referida como o melhor ajuste dos dentes, independentemente da posição condilar.',
+  };
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -120,14 +120,14 @@ class CustomSearchDelegate extends SearchDelegate {
         children: [
           Text(
             query,
-            style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
           const SizedBox (
             height: 20,
           ),
           Text(
-            query, // Atualizar para passar a descricao.
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            searchTerms[query]?.toString() ?? '',
+            style: const TextStyle(fontSize: 22),
           ),
         ],
       )
@@ -137,21 +137,22 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var term in searchTerms) {
+    Map<String, String> matchQuery = {};
+    for (var term in searchTerms.keys) {
       if(term.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(term);
+        matchQuery[term] = searchTerms[term] ?? '';
       }
     }
     return ListView.builder(
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
-        var result = matchQuery[index];
+        var result = matchQuery.keys.toList()[index];
 
         return ListTile(
           title: Text(result),
           onTap: () {
             query = result;
+
             showResults(context);
           },
         );

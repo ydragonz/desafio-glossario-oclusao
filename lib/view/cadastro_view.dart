@@ -61,6 +61,25 @@ class _CadastroViewState extends State<CadastroView> {
             ),
 
             TextFormField(
+              keyboardType: TextInputType.text,
+              decoration: const InputDecoration(
+                labelText: "Código de matrícula",
+                labelStyle: TextStyle(
+                  color: Colors.black38,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                ),
+              ),
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+            ),
+
+            const SizedBox(
+              height: 10,
+            ),
+
+            TextFormField(
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 labelText: "E-mail",

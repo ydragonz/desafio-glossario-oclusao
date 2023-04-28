@@ -50,6 +50,7 @@ class _LoginViewState extends State<LoginView> {
             TextFormField(
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.email),
                 labelText: "E-mail",
                 labelStyle: TextStyle(
                   color: Colors.black38,
@@ -57,12 +58,12 @@ class _LoginViewState extends State<LoginView> {
                   fontSize: 20,
                 )
               ),
-              validator: (value) {
+              /*validator: (value) {    // implementar validador depois
                 if(value?.isEmpty ?? true) {
                   return 'Por favor, insira seu e-mail';
                 }
                 if(value != null && !value.endsWith('@sou.unaerp.edu.br') && !value.endsWith('@unaerp.com')) {
-                  WidgetsBinding.instance!.addPostFrameCallback((_) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Por favor, insira um e-mail institucional válido'),
@@ -75,7 +76,7 @@ class _LoginViewState extends State<LoginView> {
               },
               onSaved: (value) {
                 
-              },
+              },*/
             ),
 
             const SizedBox (
@@ -86,6 +87,7 @@ class _LoginViewState extends State<LoginView> {
               keyboardType: TextInputType.text,
               obscureText: true,
               decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.lock),
                 labelText: "Senha",
                 labelStyle: TextStyle(
                   color: Colors.black38,
@@ -106,7 +108,6 @@ class _LoginViewState extends State<LoginView> {
               child: TextButton(
                 child: const Text(
                   "Esqueceu a senha?",
-                  //style: TextStyle(color: Colors.black),
                 ),
                 
                 onPressed: () {
@@ -162,31 +163,6 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
             ),
-            /*
-            const SizedBox (
-              height: 10,
-            ),
-
-            SizedBox(
-              height: 40,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget> [
-                  const Text('Ainda não tem conta?', textAlign: TextAlign.center,),
-                  TextButton(
-                    child: const Text(
-                      "Cadastre-se",
-                      textAlign: TextAlign.center,
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'cadastro');
-                    },
-                  ),
-                ]
-              ),
-                
-            ),*/
-            
           ],
         ),
       ));

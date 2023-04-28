@@ -12,34 +12,78 @@ class _SobreViewState extends State<SobreView> {
 
   @override
   Widget build(BuildContext context) {
-    
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF0E52C7),
-        title: const Text("Informações sobre o projeto"),
+        title: const Text("Informações"),
       ),
 
       body: Container(
         padding: const EdgeInsets.only(
           top: 40,
-          left: 40,
-          right: 40,
+          left: 20,
+          right: 20,
         ),
 
         child: ListView(
-          children: <Widget>[
+          children: const <Widget>[
+
+            Icon(Icons.info, size: 40,),
+
             SizedBox(
-              width: 100,
-              height: 100,
-              child: Image.asset("assets/user_icon.png"),
+              height: 10,
             ),
 
-            const SizedBox(
+            Text(
+              "Esse projeto foi desenvolvido pela sexta etapa de Engenharia de Software de 2023/1 para auxiliar alunos da Odontologia, possuindo um glossário com campo de busca para encontrar termos técnicos e formulários que podem ser disponibilizados pelos professores.", 
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+
+            SizedBox(
               height: 40,
             ),
 
-            const Text(
-              "Informações sobre o projeto", 
+            Text(
+              "Alunos", 
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
+            ),
+
+            Divider(),
+
+            SizedBox(
+              height: 5,
+            ),
+
+            Text(
+              "Leonardo Bernardes de Oliveira", 
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+
+            SizedBox(
+              height: 10,
+            ),
+
+            Text(
+              "Ana Laura Alves", 
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ), 
+
+            SizedBox(
+              height: 40,
+            ),
+
+            Text(
+              "Professores", 
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -47,102 +91,55 @@ class _SobreViewState extends State<SobreView> {
               ),
             ),
 
-            TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: const InputDecoration(
-                labelText: "Nome",
-                labelStyle: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
-                ),
-              ),
-              style: const TextStyle(
-                fontSize: 20,
-              ),
+            Divider(),
+
+            SizedBox(
+              height: 5,
             ),
 
-            const SizedBox(
+            Text(
+              "Edilson Carlos Carita", 
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ), 
+
+            SizedBox(
               height: 10,
             ),
 
-            
+            Text(
+              "Carlos Alves da Silva", 
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ), 
+
+            SizedBox(
+              height: 10,
+            ),
+
+            Text(
+              "Rodrigo de Oliveira Plotze", 
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ), 
+
+            SizedBox(
+              height: 10,
+            ),
+
+            Text(
+              "Fabiano Goncalves dos Santos", 
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ), 
             
           ],
         )
       )
-
-      /*body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Nome'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Por favor, insira seu nome';
-                  }
-                  return null;
-                },
-                onSaved: (value) => _nome = value,
-              ),
-              SizedBox(height: 16.0),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Matrícula'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Por favor, insira sua matrícula';
-                  }
-                  return null;
-                },
-                onSaved: (value) => _matricula = value,
-              ),
-              SizedBox(height: 16.0),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'E-mail'),
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Por favor, insira seu e-mail';
-                  }
-                  if (!value.endsWith('@sou.unaerp.edu.br')) {
-                    return 'Apenas alunos podem se cadastrar na plataforma';
-                  }
-                  return null;
-                },
-                onSaved: (value) => _email = value,
-              ),
-              SizedBox(height: 16.0),
-
-              Container(
-                height: 60,
-                alignment: Alignment.centerLeft,
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 41, 109, 228),
-                  borderRadius: BorderRadius.all(Radius.circular(10),),
-                ),
-                child: SizedBox.expand(
-                  child: TextButton(
-                    onPressed: _submitForm,
-                    child: const Text(
-                      "Cadastrar",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
-                    )
-                    
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),*/
     );
   }
 }

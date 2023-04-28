@@ -17,7 +17,7 @@ class _CadastroViewState extends State<CadastroView> {
 
   @override
   Widget build(BuildContext context) {
-    
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF0E52C7),
@@ -45,6 +45,7 @@ class _CadastroViewState extends State<CadastroView> {
             TextFormField(
               keyboardType: TextInputType.text,
               decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.account_box_rounded),
                 labelText: "Nome",
                 labelStyle: TextStyle(
                   color: Colors.black38,
@@ -64,6 +65,7 @@ class _CadastroViewState extends State<CadastroView> {
             TextFormField(
               keyboardType: TextInputType.text,
               decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.assignment),
                 labelText: "Código de matrícula",
                 labelStyle: TextStyle(
                   color: Colors.black38,
@@ -83,6 +85,7 @@ class _CadastroViewState extends State<CadastroView> {
             TextFormField(
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.email),
                 labelText: "E-mail",
                 labelStyle: TextStyle(
                   color: Colors.black38,
@@ -103,6 +106,7 @@ class _CadastroViewState extends State<CadastroView> {
               keyboardType: TextInputType.text,
               obscureText: true,
               decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.lock),
                 labelText: "Senha",
                 labelStyle: TextStyle(
                   color: Colors.black38,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glossario_oclusao/model/termo.dart';
+import 'package:glossario_oclusao/model/termo.dart';  // Ainda será implementado.
 
 class PrincipalView extends StatefulWidget {
   const PrincipalView({super.key});
@@ -9,6 +9,7 @@ class PrincipalView extends StatefulWidget {
 }
 
 class _PrincipalViewState extends State<PrincipalView> {
+
   @override
   Widget build(BuildContext context) {
 

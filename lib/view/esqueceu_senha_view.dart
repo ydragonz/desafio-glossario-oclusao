@@ -40,7 +40,7 @@ class _EsqueceuSenhaViewState extends State<EsqueceuSenhaView> {
             const Text(
               "Esqueceu sua senha?",
               style: TextStyle(
-                fontSize: 32,
+                fontSize: 30,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -65,6 +65,7 @@ class _EsqueceuSenhaViewState extends State<EsqueceuSenhaView> {
             TextFormField(
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.email),
                 labelText: "E-mail",
                 labelStyle: TextStyle(
                   color: Colors.black38,

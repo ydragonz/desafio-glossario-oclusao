@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glossario_oclusao/model/termo.dart';
 
 class PrincipalView extends StatefulWidget {
   const PrincipalView({super.key});
@@ -10,6 +11,7 @@ class PrincipalView extends StatefulWidget {
 class _PrincipalViewState extends State<PrincipalView> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 14, 82, 199),
@@ -70,6 +72,12 @@ class _PrincipalViewState extends State<PrincipalView> {
             ),
           ),
           
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(context, '/sobre'),
+        backgroundColor: const Color.fromARGB(255, 14, 82, 199),
+        child: const Icon(Icons.info_outline),
       ),
     );
   }

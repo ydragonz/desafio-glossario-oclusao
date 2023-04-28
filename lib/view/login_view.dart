@@ -1,7 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:glossario_oclusao/model/cadastro.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -18,6 +16,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(top: 60, left: 40, right: 40,),
@@ -36,7 +35,7 @@ class _LoginViewState extends State<LoginView> {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 1,
                     blurRadius: 2,
-                    offset: const Offset(0, 3), // changes position of shadow
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -111,7 +110,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 
                 onPressed: () {
-                  Navigator.pushNamed(context, 'esqueceu_senha');
+                  Navigator.pushNamed(context, '/esqueceu_senha');
                 },
               ),
             ),
@@ -130,7 +129,7 @@ class _LoginViewState extends State<LoginView> {
               child: SizedBox.expand(
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, 'principal');
+                    Navigator.pushNamed(context, '/principal');
                   },
                   child: const Text(
                     "Login",
@@ -157,9 +156,7 @@ class _LoginViewState extends State<LoginView> {
                         "Cadastre-se",
                         textAlign: TextAlign.center,
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'cadastro');
-                      },
+                      onPressed: () => Navigator.pushNamed(context, '/cadastro'),
                     ),
                   ],
                 ),

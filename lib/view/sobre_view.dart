@@ -1,19 +1,14 @@
 
 import 'package:flutter/material.dart';
 
-class CadastroView extends StatefulWidget {
-  const CadastroView({super.key});
+class SobreView extends StatefulWidget {
+  const SobreView({super.key});
 
   @override
-  State<CadastroView> createState() => _CadastroViewState();
+  State<SobreView> createState() => _SobreViewState();
 }
 
-class _CadastroViewState extends State<CadastroView> {
-  /*final _formKey = GlobalKey<FormState>();
-
-  String? _nome;
-  String? _matricula;
-  String? _email;*/
+class _SobreViewState extends State<SobreView> {
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +16,7 @@ class _CadastroViewState extends State<CadastroView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF0E52C7),
+        title: const Text("Informações sobre o projeto"),
       ),
 
       body: Container(
@@ -42,6 +38,15 @@ class _CadastroViewState extends State<CadastroView> {
               height: 40,
             ),
 
+            const Text(
+              "Informações sobre o projeto", 
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+
             TextFormField(
               keyboardType: TextInputType.text,
               decoration: const InputDecoration(
@@ -61,101 +66,13 @@ class _CadastroViewState extends State<CadastroView> {
               height: 10,
             ),
 
-            TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: const InputDecoration(
-                labelText: "Código de matrícula",
-                labelStyle: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
-                ),
-              ),
-              style: const TextStyle(
-                fontSize: 20,
-              ),
-            ),
-
-            const SizedBox(
-              height: 10,
-            ),
-
-            TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                labelText: "E-mail",
-                labelStyle: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
-                ),
-              ),
-              style: const TextStyle(
-                fontSize: 20,
-              ),
-            ),
-
-            const SizedBox(
-              height: 10,
-            ),
-
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: "Senha",
-                labelStyle: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
-                ),
-              ),
-              style: const TextStyle(
-                fontSize: 20,
-              ),
-            ),
-
-            const SizedBox(
-              height: 30,
-            ),
-
-            Container(
-              height: 60,
-              alignment: Alignment.centerLeft,
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 41, 109, 228),
-                borderRadius: BorderRadius.all(Radius.circular(10),),
-              ),
-              child: SizedBox.expand(
-                child: TextButton(
-                  onPressed: () {
-                    var snackBar = const SnackBar(content: Text('Usuário cadastrado!'));
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    Navigator.pop(context);
-                  },
-                  child: const Text(
-                    "Enviar",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  )
-                  
-                ),
-              ),
-            ),
-
+            
             
           ],
         )
       )
 
-      /*
-      
-      Codigo de teste de verificacao de formulario, atualizar para o novo layout depois.
-      
-      body: Padding(
+      /*body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
@@ -228,11 +145,4 @@ class _CadastroViewState extends State<CadastroView> {
       ),*/
     );
   }
-
-  /*void _submitForm() {
-    final form = _formKey.currentState;
-    if (form != null && form.validate()) {
-      form.save();
-    }
-  }*/
 }

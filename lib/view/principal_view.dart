@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glossario_oclusao/model/termo_model.dart';  // Ainda será implementado.]
+import 'package:glossario_oclusao/model/termo_model.dart';  // Ainda será implementado.
 import 'package:glossario_oclusao/controller/login_controller.dart';
 
 class PrincipalView extends StatefulWidget {
@@ -20,8 +20,8 @@ class _PrincipalViewState extends State<PrincipalView> {
         leading: IconButton(
           icon: const Icon(Icons.logout),
           onPressed: () {
-            Navigator.of(context).pop();
-            logout();
+            Navigator.of(context).pop();  // Atualizar depois para limpar todas as telas da pilha e voltar para a tela de login
+            //logout();  Sera implementada a funcao de logout de login_controller.dart
           }, 
         ),
         title: const Text("Glossário de Oclusão"),
@@ -83,10 +83,6 @@ class _PrincipalViewState extends State<PrincipalView> {
       ),
     );
   }
-}
-
-logout() {
-  // Codigo para realizar logout será implementado aqui.
 }
 
 class CustomSearchDelegate extends SearchDelegate {

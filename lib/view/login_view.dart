@@ -15,6 +15,16 @@ class _LoginViewState extends State<LoginView> {
 
   final LoginController _loginController = LoginController();
 
+  String? _emailValidator(String? value) {
+    if (value?.isEmpty ?? true) {
+      return 'Por favor, insira seu e-mail';
+    }
+    if (value != null && !value.endsWith('@sou.unaerp.edu.br') && !value.endsWith('@unaerp.com')) {
+      return 'Por favor, insira um e-mail institucional válido';
+    }
+    return null;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -67,15 +77,7 @@ class _LoginViewState extends State<LoginView> {
                     fontSize: 20,
                   )
                 ),
-                validator: (value) {
-                  if(value?.isEmpty ?? true) {
-                    return 'Por favor, insira seu e-mail';
-                  }
-                  if(value != null && !value.endsWith('@sou.unaerp.edu.br') && !value.endsWith('@unaerp.com')) {
-                    return 'Por favor, insira um e-mail institucional válido';
-                  }
-                  return null;
-                },
+                validator: _emailValidator,
               ),
 
               const SizedBox (
@@ -147,7 +149,7 @@ class _LoginViewState extends State<LoginView> {
                               content: Text(e.toString()),
                               actions: <Widget>[
                                 TextButton(
-                                  child: Text('OK'),
+                                  child: const Text('OK'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },

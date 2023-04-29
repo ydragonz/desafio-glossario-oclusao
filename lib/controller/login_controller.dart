@@ -5,6 +5,14 @@
 
 
 class LoginController {
+  static final LoginController _singleton = LoginController._internal();
+
+  factory LoginController() {
+    return _singleton;
+  }
+
+  LoginController._internal();
+
   final String _emailValido = 'teste@sou.unaerp.edu.br';
   final String _senhaValida = 'senha123';
 

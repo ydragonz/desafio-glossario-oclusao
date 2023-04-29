@@ -16,11 +16,11 @@ void main() {
     });
 
     test('tentativa de login com credenciais inválidas gerará uma exception', () {
-      expect(() => controller.login('invalid', 'credentials'),
-          throwsA(isInstanceOf<Exception>()));
+      expect(() => controller.login('emailincorreto@sou.unaerp.edu.br', 'senha_incorreta'),
+        throwsA(isInstanceOf<Exception>()));
     });
 
-    test('logout should set logado to false', () async {
+    test('função logout deve setar "logado" como false', () async {
       await controller.login('teste@sou.unaerp.edu.br', 'senha123');
 
       expect(controller.logado, isTrue);

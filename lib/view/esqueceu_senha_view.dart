@@ -50,7 +50,7 @@ class _EsqueceuSenhaViewState extends State<EsqueceuSenhaView> {
             ),
 
             const Text(
-              "Por favor, digite o seu e-mail institucional, ele deve terminar em @sou.unaerp.edu.br ou @unaerp.br e então enviaremos um link para redefinição da senha.",
+              "Por favor, digite o seu e-mail institucional, ele deve terminar em @sou.unaerp.edu.br e então enviaremos um link para redefinição da senha.",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,

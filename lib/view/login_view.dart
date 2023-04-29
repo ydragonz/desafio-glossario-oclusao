@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glossario_oclusao/model/cadastro.dart';
+import 'package:glossario_oclusao/controller/login_controller.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -9,6 +9,12 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
+
+  final LoginController _loginController = LoginController();
+
   @override
   void initState() {
     super.initState();
@@ -19,134 +25,154 @@ class _LoginViewState extends State<LoginView> {
 
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(top: 60, left: 40, right: 40,),
+        padding: const EdgeInsets.only(top: 120, left: 40, right: 40,),
         color: Colors.white10,
-        child: ListView(
-          children: <Widget>[
+        child: Form(
+          key: _formKey,
+          child: Column(
 
-            Container (
-              width: 128,
-              height: 128,
-              
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 1,
-                    blurRadius: 2,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-              ),
-
-              child: Image.asset("assets/logo_unaerp_rounded.png",),
-            ),
-
-            const SizedBox (
-              height: 50,
-            ),
-
-            TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.email),
-                labelText: "E-mail",
-                labelStyle: TextStyle(
-                  color: Colors.black38,
-                  fontWeight:FontWeight.w400,
-                  fontSize: 20,
-                )
-              ),
-              /*validator: (value) {    // implementar validador depois
-                if(value?.isEmpty ?? true) {
-                  return 'Por favor, insira seu e-mail';
-                }
-                if(value != null && !value.endsWith('@sou.unaerp.edu.br') && !value.endsWith('@unaerp.com')) {
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Por favor, insira um e-mail institucional válido'),
-                      ),
-                    );
-                  });
-                  return 'Por favor, insira seu e-mail institucional válido';
-                }
-                return null;
-              },
-              onSaved: (value) {
+            children: <Widget>[
+              Container (
+                width: 128,
+                height: 128,
                 
-              },*/
-            ),
-
-            const SizedBox (
-              height: 20,
-            ),
-
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: true,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.lock),
-                labelText: "Senha",
-                labelStyle: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 2,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
                 ),
+
+                child: Image.asset("assets/logo_unaerp_rounded.png",),
               ),
-              style: const TextStyle(fontSize: 20),
-            ),
 
-            const SizedBox (
-              height: 5,
-            ),
+              const SizedBox (
+                height: 50,
+              ),
 
-            Container(
-              height: 40,
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                child: const Text(
-                  "Esqueceu a senha?",
+              TextFormField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.email),
+                  labelText: "E-mail",
+                  labelStyle: TextStyle(
+                    color: Colors.black38,
+                    fontWeight:FontWeight.w400,
+                    fontSize: 20,
+                  )
                 ),
-                
-                onPressed: () {
-                  Navigator.pushNamed(context, '/esqueceu_senha');
+                validator: (value) {
+                  if(value?.isEmpty ?? true) {
+                    return 'Por favor, insira seu e-mail';
+                  }
+                  if(value != null && !value.endsWith('@sou.unaerp.edu.br') && !value.endsWith('@unaerp.com')) {
+                    return 'Por favor, insira um e-mail institucional válido';
+                  }
+                  return null;
                 },
               ),
-            ),
 
-            const SizedBox (
-              height: 50,
-            ),
-
-            Container(
-              height: 60,
-              alignment: Alignment.centerLeft,
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 41, 109, 228),
-                borderRadius: BorderRadius.all(Radius.circular(10),),
+              const SizedBox (
+                height: 20,
               ),
-              child: SizedBox.expand(
+
+              TextFormField(
+                controller: _senhaController,
+                keyboardType: TextInputType.text,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.lock),
+                  labelText: "Senha",
+                  labelStyle: TextStyle(
+                    color: Colors.black38,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
+                  ),
+                ),
+                style: const TextStyle(fontSize: 20),
+                validator: (value) {
+                  if(value?.isEmpty ?? true) {
+                    return 'Por favor, insira sua senha';
+                  }
+                },
+              ),
+
+              const SizedBox (
+                height: 5,
+              ),
+
+              Container(
+                height: 40,
+                alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/principal');
-                  },
                   child: const Text(
-                    "Login",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  )
+                    "Esqueceu a senha?",
+                  ),
                   
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/esqueceu_senha');
+                  },
                 ),
               ),
-            ),
-            
-            Expanded(
-              child: SizedBox(
+
+              const SizedBox (
+                height: 50,
+              ),
+
+              Container(
+                height: 60,
+                alignment: Alignment.centerLeft,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 41, 109, 228),
+                  borderRadius: BorderRadius.all(Radius.circular(10),),
+                ),
+                child: SizedBox.expand(
+                  child: TextButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        try {
+                          await _loginController.login(_emailController.text, _senhaController.text);
+                          Navigator.pushNamed(context, '/principal');
+                        } catch (e) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text('Erro de autenticação'),
+                              content: Text(e.toString()),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: Text('OK'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                )
+                              ],
+                            ),
+                          );
+                        }
+                      }
+                      //Navigator.pushNamed(context, '/principal');
+                    },
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    )
+                    
+                  ),
+                ),
+              ),
+
+              SizedBox(
                 height: 40,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -162,8 +188,10 @@ class _LoginViewState extends State<LoginView> {
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          )
+
+            
         ),
       ));
   }

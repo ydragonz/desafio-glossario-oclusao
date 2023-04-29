@@ -108,8 +108,6 @@ class _EsqueceuSenhaViewState extends State<EsqueceuSenhaView> {
                 ),
               ),
             ),
-
-            
           ],
         )
       )

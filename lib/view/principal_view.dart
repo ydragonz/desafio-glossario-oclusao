@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:glossario_oclusao/model/termo.dart';  // Ainda será implementado.
+import 'package:glossario_oclusao/model/termo_model.dart';  // Ainda será implementado.]
+import 'package:glossario_oclusao/controller/login_controller.dart';
 
 class PrincipalView extends StatefulWidget {
   const PrincipalView({super.key});

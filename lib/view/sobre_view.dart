@@ -36,7 +36,7 @@ class _SobreViewState extends State<SobreView> {
             ),
 
             Text(
-              "Esse projeto foi desenvolvido pela sexta etapa de Engenharia de Software de 2023/1 para auxiliar alunos da Odontologia, possuindo um glossário com campo de busca para encontrar termos técnicos e formulários que podem ser disponibilizados pelos professores.", 
+              "Esse projeto foi desenvolvido pela sexta etapa de Engenharia de Software de 2023/1 para auxiliar alunos da Odontologia, possuindo um glossário com campo de busca para encontrar termos técnicos e exercícios que podem ser disponibilizados pelos professores.", 
               style: TextStyle(
                 fontSize: 16,
               ),

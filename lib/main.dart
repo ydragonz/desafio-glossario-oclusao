@@ -1,16 +1,19 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:glossario_oclusao/view/sobre_view.dart';
 
 import 'view/principal_view.dart';
 import 'view/login_view.dart';
 import 'view/cadastro_view.dart';
 import 'view/esqueceu_senha_view.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
-
+Future<void> main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,

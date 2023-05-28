@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:glossario_oclusao/model/termo_model.dart';  // Ainda será implementado.
 import 'package:glossario_oclusao/controller/login_controller.dart';
 
 class PrincipalView extends StatefulWidget {
@@ -10,6 +10,8 @@ class PrincipalView extends StatefulWidget {
 }
 
 class _PrincipalViewState extends State<PrincipalView> {
+
+  final usuario = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +63,7 @@ class _PrincipalViewState extends State<PrincipalView> {
                 const Center(
                   child: 
                     Text(
-                      "Bem-vindo de volta (usuario)!",
+                      "Bem-vindo de volta ",
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w400,
@@ -86,6 +88,8 @@ class _PrincipalViewState extends State<PrincipalView> {
 }
 
 class CustomSearchDelegate extends SearchDelegate {
+
+  // Termos relacionados a oclusão dentária
   Map<String, String> searchTerms = {
     'Relação Cêntrica (RC)': 'Relacionamento maxilomandibular independente do contato dentário, no qual os côndilos se articulam na posição anterossuperior contra as inclinações posteriores das eminências articulares. Nesta posição, a mandíbula realiza apenas um movimento de rotação. A partir desta posição fisiológica, de relação maxilomandibular, o paciente pode realizar movimentos laterais, verticais ou protrusivos. Clinicamente é uma posição de referência útil e repetível. Portanto, a RC é uma posição condilar que independe dos contatos dentários.',
     'Espaço Funcional Livre (EFL)': 'É a distância entre os dentes antagonistas quando a mandíbula está em posição de repouso postural. É a diferença entre a dimensão vertical de repouso e a de oclusão e apresenta valores médios de 3 mm. O Glossário de termos protéticos, em sua 9ª edição (GPT-9, 2017) conceitua esse espaço como Espaço de Repouso Interoclusal (IORS – interoclusal rest space).',

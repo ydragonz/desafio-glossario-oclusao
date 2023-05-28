@@ -15,6 +15,16 @@ class _LoginViewState extends State<LoginView> {
 
   final LoginController _loginController = LoginController();
 
+  /*
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _senhaController.dispose();
+
+    super.dispose();
+  }
+  */
+
   String? _emailValidator(String? value) {
     if (value?.isEmpty ?? true) {
       return 'Por favor, insira seu e-mail';
@@ -31,9 +41,7 @@ class _LoginViewState extends State<LoginView> {
   }
 
   @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       body: Container(
         padding: const EdgeInsets.only(top: 120, left: 40, right: 40,),
         color: Colors.white10,
@@ -136,7 +144,8 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 child: SizedBox.expand(
                   child: TextButton(
-                    onPressed: () async {
+                    onPressed: () {
+                      /*
                       if (_formKey.currentState!.validate()) {
                         try {
                           await _loginController.login(_emailController.text, _senhaController.text);
@@ -158,8 +167,10 @@ class _LoginViewState extends State<LoginView> {
                             ),
                           );
                         }
-                      }
+                      }*/
                       //Navigator.pushNamed(context, '/principal');
+
+                      _loginController.login(context, _emailController.text, _senhaController.text);
                     },
                     child: const Text(
                       "Login",
@@ -196,5 +207,4 @@ class _LoginViewState extends State<LoginView> {
             
         ),
       ));
-  }
 }

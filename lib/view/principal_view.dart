@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glossario_oclusao/controller/login_controller.dart';
 import 'package:glossario_oclusao/view/nav_bar_view.dart';
-import '../controller/termos_controller.dart';
+import '../controller/termo_controller.dart';
 
 class PrincipalView extends StatefulWidget {
   const PrincipalView({super.key});
@@ -86,7 +86,7 @@ class _PrincipalViewState extends State<PrincipalView> {
                       Center(
                         child: 
                           Text(
-                            nomeUsuario,
+                            "Seja bem vindo(a) de volta \n$nomeUsuario",
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w400,

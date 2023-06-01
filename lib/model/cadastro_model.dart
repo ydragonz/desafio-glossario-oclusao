@@ -3,7 +3,6 @@ class Cadastro {
   final String codigoMatricula;
   String email;
   String senha;
-  final bool tipo; // 0-> Aluno  |  1-> Professor
 
   get getNome => nome;
 
@@ -19,7 +18,21 @@ class Cadastro {
 
   set setSenha( senha) => this.senha = senha;
 
-  get getTipo => tipo;
+  Cadastro(this.nome, this.codigoMatricula, this.email, this.senha);
 
-  Cadastro(this.nome, this.codigoMatricula, this.tipo, this.email, this.senha);
+  /*Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'uid': uid,
+      'titulo': titulo,
+      'descricao': descricao
+    };
+  }
+
+  factory Tarefa.fromJson(Map<String, dynamic> json) {
+    return Tarefa(
+      json['uid'],
+      json['titulo'],
+      json['descricao'],
+    );
+  }*/
 }

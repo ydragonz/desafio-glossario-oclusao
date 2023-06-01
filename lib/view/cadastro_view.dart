@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:glossario_oclusao/controller/login_controller.dart';
 
 class CadastroView extends StatefulWidget {
   const CadastroView({super.key});
@@ -9,16 +9,32 @@ class CadastroView extends StatefulWidget {
 }
 
 class _CadastroViewState extends State<CadastroView> {
-  /*final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _nomeController = TextEditingController();
+  final TextEditingController _codigoController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
 
-  String? _nome;
-  String? _matricula;
-  String? _email;*/
+  final LoginController _loginController = LoginController();
+  /*
+  @override
+  void initState() {
+    super.initState();
+  }
+  */
 
   @override
-  Widget build(BuildContext context) {
+  void dispose() {
+    _nomeController.dispose();
+    _codigoController.dispose();
+    _emailController.dispose();
+    _senhaController.dispose();
 
-    return Scaffold(
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF0E52C7),
       ),
@@ -30,130 +46,167 @@ class _CadastroViewState extends State<CadastroView> {
           right: 40,
         ),
 
-        child: ListView(
-          children: <Widget>[
-            SizedBox(
-              width: 100,
-              height: 100,
-              child: Image.asset("assets/user_icon.png"),
-            ),
+        child: Form(
+          key: _formKey,
 
-            const SizedBox(
-              height: 40,
-            ),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                width: 100,
+                height: 100,
+                child: Image.asset("assets/user_icon.png"),
+              ),
 
-            TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.account_box_rounded),
-                labelText: "Nome",
-                labelStyle: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w400,
+              const SizedBox(
+                height: 40,
+              ),
+
+              TextFormField(
+                controller: _nomeController,
+                keyboardType: TextInputType.text,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.account_box_rounded),
+                  labelText: "Nome",
+                  labelStyle: TextStyle(
+                    color: Colors.black38,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
+                  ),
+                ),
+                style: const TextStyle(
                   fontSize: 20,
                 ),
+                validator: (value) {
+                  if (value?.isEmpty ?? true) {
+                    return 'Por favor, insira seu nome';
+                  }
+                  return null;
+                }
               ),
-              style: const TextStyle(
-                fontSize: 20,
+
+              const SizedBox(
+                height: 10,
               ),
-            ),
 
-            const SizedBox(
-              height: 10,
-            ),
-
-            TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.assignment),
-                labelText: "Código de matrícula",
-                labelStyle: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w400,
+              TextFormField(
+                controller: _codigoController,
+                keyboardType: TextInputType.text,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.assignment),
+                  labelText: "Código de matrícula",
+                  labelStyle: TextStyle(
+                    color: Colors.black38,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
+                  ),
+                ),
+                style: const TextStyle(
                   fontSize: 20,
                 ),
+                validator: (value) {
+                  if (value?.isEmpty ?? true) {
+                    return 'Por favor, insira seu código de matrícula';
+                  }
+                  return null;
+                }
               ),
-              style: const TextStyle(
-                fontSize: 20,
+
+              const SizedBox(
+                height: 10,
               ),
-            ),
 
-            const SizedBox(
-              height: 10,
-            ),
-
-            TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.email),
-                labelText: "E-mail",
-                labelStyle: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w400,
+              TextFormField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.email),
+                  labelText: "E-mail",
+                  labelStyle: TextStyle(
+                    color: Colors.black38,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
+                  ),
+                ),
+                style: const TextStyle(
                   fontSize: 20,
                 ),
+                validator: (value) {
+                if (value?.isEmpty ?? true) {
+                  return 'Por favor, insira seu e-mail';
+                }
+                if (value != null && !value.endsWith('@sou.unaerp.edu.br')) {
+                  return 'Por favor, insira um e-mail institucional válido';
+                }
+                return null;
+              },
               ),
-              style: const TextStyle(
-                fontSize: 20,
+
+              const SizedBox(
+                height: 10,
               ),
-            ),
 
-            const SizedBox(
-              height: 10,
-            ),
-
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: true,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.lock),
-                labelText: "Senha",
-                labelStyle: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w400,
+              TextFormField(
+                controller: _senhaController,
+                keyboardType: TextInputType.text,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.lock),
+                  labelText: "Senha",
+                  labelStyle: TextStyle(
+                    color: Colors.black38,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
+                  ),
+                ),
+                style: const TextStyle(
                   fontSize: 20,
                 ),
+                validator: (value) {
+                if (value?.isEmpty ?? true) {
+                  return 'Por favor, insira sua senha';
+                }
+                return null;
+              },
               ),
-              style: const TextStyle(
-                fontSize: 20,
-              ),
-            ),
 
-            const SizedBox(
-              height: 30,
-            ),
-
-            Container(
-              height: 60,
-              alignment: Alignment.centerLeft,
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 41, 109, 228),
-                borderRadius: BorderRadius.all(Radius.circular(10),),
+              const SizedBox(
+                height: 30,
               ),
-              child: SizedBox.expand(
-                child: TextButton(
-                  onPressed: () {
-                    var snackBar = const SnackBar(content: Text('Usuário cadastrado!'));
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    Navigator.pop(context);
-                  },
-                  child: const Text(
-                    "Enviar",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  )
-                  
+
+              Container(
+                height: 60,
+                alignment: Alignment.centerLeft,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 41, 109, 228),
+                  borderRadius: BorderRadius.all(Radius.circular(10),),
+                ),
+                child: SizedBox.expand(
+                  child: TextButton(
+                    onPressed: () {
+                      _loginController.criarConta(
+                        context, 
+                        _nomeController.text, 
+                        _codigoController.text,
+                        _emailController.text,
+                        _senhaController.text,
+                      );
+                    },
+                    child: const Text(
+                      "Enviar",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    )
+                    
+                  ),
                 ),
               ),
-            ),
-
-            
-          ],
-        )
-      )
+            ],
+          ),
+        ),
+      ),
 
       /*
       
@@ -231,7 +284,7 @@ class _CadastroViewState extends State<CadastroView> {
         ),
       ),*/
     );
-  }
+  
 
   /*void _submitForm() {
     final form = _formKey.currentState;

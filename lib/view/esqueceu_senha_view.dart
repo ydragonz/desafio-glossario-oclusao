@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glossario_oclusao/controller/login_controller.dart';
 
 class EsqueceuSenhaView extends StatefulWidget {
   
@@ -9,23 +10,40 @@ class EsqueceuSenhaView extends StatefulWidget {
 }
 
 class _EsqueceuSenhaViewState extends State<EsqueceuSenhaView> {
-  
-  @override
-  Widget build(BuildContext context) {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 14, 82, 199),
+  final LoginController _loginController = LoginController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+
+    super.dispose();
+  }
+  /*
+  @override
+  void initState() {
+    super.initState();
+  }*/
+
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(
+      backgroundColor: const Color.fromARGB(255, 14, 82, 199),
+    ),
+
+    body: Container(
+      padding: const EdgeInsets.only(
+        top: 60,
+        left: 40,
+        right: 40,
       ),
 
-      body: Container(
-        padding: const EdgeInsets.only(
-          top: 60,
-          left: 40,
-          right: 40,
-        ),
-
-        child: ListView(
+      child: Form(
+        key: _formKey,
+        child: Column(
           children: <Widget>[
             SizedBox(
               width: 200,
@@ -63,6 +81,7 @@ class _EsqueceuSenhaViewState extends State<EsqueceuSenhaView> {
             ),
 
             TextFormField(
+              controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.email),
@@ -76,6 +95,15 @@ class _EsqueceuSenhaViewState extends State<EsqueceuSenhaView> {
               style: const TextStyle(
                 fontSize: 20,
               ),
+              validator: (value) {
+                if (value?.isEmpty ?? true) {
+                  return 'Por favor, insira seu e-mail';
+                }
+                if (value != null && !value.endsWith('@sou.unaerp.edu.br')) {
+                  return 'Por favor, insira um e-mail institucional válido';
+                }
+                return null;
+              },
             ),
 
             const SizedBox(
@@ -92,9 +120,27 @@ class _EsqueceuSenhaViewState extends State<EsqueceuSenhaView> {
               child: SizedBox.expand(
                 child: TextButton(
                   onPressed: () {
-                    var snackBar = const SnackBar(content: Text('E-mail enviado!'));
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    Navigator.pop(context);
+                    if (_formKey.currentState!.validate()) {
+                        //try {
+                          _loginController.esqueceuSenha(context, _emailController.text);
+                        /*} catch (e) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text('Erro de autenticação'),
+                              content: Text(e.toString()),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: const Text('OK'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                )
+                              ],
+                            ),
+                          );
+                        }*/
+                      }
                   },
                   child: const Text(
                     "Enviar",
@@ -109,8 +155,16 @@ class _EsqueceuSenhaViewState extends State<EsqueceuSenhaView> {
               ),
             ),
           ],
-        )
+
+        ),
       )
-    );
-  }
+      
+      
+
+        
+      
+    )
+
+  );
+
 }

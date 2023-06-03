@@ -15,23 +15,23 @@ class _LoginViewState extends State<LoginView> {
 
   final LoginController _loginController = LoginController();
 
-  @override
+  /*@override
   void dispose() {
     _emailController.dispose();
     _senhaController.dispose();
 
     super.dispose();
-  }
+  }*/
 
-  @override
+  /*@override
   void initState() {
     super.initState();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) => Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(top: 120, left: 30, right: 30,),
+        padding: const EdgeInsets.only(top: 120, left: 25, right: 25,),
         color: Colors.white10,
         child: Form(
           key: _formKey,
@@ -156,6 +156,10 @@ class _LoginViewState extends State<LoginView> {
                     
                   ),
                 ),
+              ),
+
+              const SizedBox (
+                height: 5,
               ),
 
               SizedBox(

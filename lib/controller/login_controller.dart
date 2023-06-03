@@ -141,37 +141,35 @@ class LoginController {
   }
 
   Future<Map<String, String>> usuarioLogado() async {
-  var usuario = {
-    'nome': '',
-    'email': '',
-  };
+    var usuario = {
+      'nome': '',
+      'email': '',
+    };
 
-  try {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      final snapshot = await FirebaseFirestore.instance
-          .collection('alunos')
-          .where('uid', isEqualTo: user.uid)
-          .get();
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final snapshot = await FirebaseFirestore.instance
+            .collection('alunos')
+            .where('uid', isEqualTo: user.uid)
+            .get();
 
-      if (snapshot.docs.isNotEmpty) {
-        final aluno = snapshot.docs[0].data();
-        usuario['nome'] = aluno['nome'] ?? '';
-        print('Nome do usuário: ${usuario['nome']}');
+        if (snapshot.docs.isNotEmpty) {
+          final aluno = snapshot.docs[0].data();
+          usuario['nome'] = aluno['nome'] ?? '';
+          //print('Nome do usuário: ${usuario['nome']}');
+        }
+
+        usuario['email'] = user.email ?? '';
+        //print('Email do usuário: ${usuario['email']}');
       }
-
-      usuario['email'] = user.email ?? '';
-      print('Email do usuário: ${usuario['email']}');
+    } catch (e) {
+      throw Exception('Erro ao obter dados do usuário: $e');
     }
-  } catch (e) {
-    throw Exception('Erro ao obter dados do usuário: $e');
+
+    return usuario;
   }
 
-  return usuario;
-}
-
-
-//.doc(user.uid)
 
   String idUsuario() {
     final user = FirebaseAuth.instance.currentUser;

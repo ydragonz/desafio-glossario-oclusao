@@ -42,8 +42,8 @@ class _CadastroViewState extends State<CadastroView> {
       body: Container(
         padding: const EdgeInsets.only(
           top: 40,
-          left: 40,
-          right: 40,
+          left: 25,
+          right: 25,
         ),
 
         child: Form(
@@ -183,13 +183,15 @@ class _CadastroViewState extends State<CadastroView> {
                 child: SizedBox.expand(
                   child: TextButton(
                     onPressed: () {
-                      _loginController.criarConta(
-                        context, 
-                        _nomeController.text, 
-                        _codigoController.text,
-                        _emailController.text,
-                        _senhaController.text,
-                      );
+                      if (_formKey.currentState!.validate()) {
+                        _loginController.criarConta(
+                          context, 
+                          _nomeController.text, 
+                          _codigoController.text,
+                          _emailController.text,
+                          _senhaController.text,
+                        );
+                      }
                     },
                     child: const Text(
                       "Enviar",

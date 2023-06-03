@@ -61,7 +61,7 @@ class _SobreViewState extends State<SobreView> {
             ),
 
             Text(
-              "Leonardo Bernardes de Oliveira", 
+              "Leonardo Bernardes de Oliveira \n(leonardo.boliveira@sou.unaerp.edu.br)", 
               style: TextStyle(
                 fontSize: 20,
               ),
@@ -72,7 +72,7 @@ class _SobreViewState extends State<SobreView> {
             ),
 
             Text(
-              "Ana Laura Alves", 
+              "Ana Laura Alves \n(ana.lalves@sou.unaerp.edu.br)", 
               style: TextStyle(
                 fontSize: 20,
               ),

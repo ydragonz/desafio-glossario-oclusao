@@ -26,7 +26,7 @@ class _PrincipalViewState extends State<PrincipalView> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // Exibir um indicador de carregamento enquanto os dados do usuário estão sendo carregados
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
 
         } else if (snapshot.hasError) {
           // Tratar qualquer erro ocorrido ao obter os dados do usuário
@@ -41,7 +41,7 @@ class _PrincipalViewState extends State<PrincipalView> {
           final emailUsuario = dadosUsuario['email'] ?? '';
 
           return Scaffold(
-            drawer: NavBar(nome: nomeUsuario, email: emailUsuario),
+            drawer: NavBar(nome: nomeUsuario, email: emailUsuario, loginController: _loginController,),
             appBar: AppBar(
               backgroundColor: const Color.fromARGB(255, 14, 82, 199),
               /*leading: IconButton(
@@ -86,7 +86,7 @@ class _PrincipalViewState extends State<PrincipalView> {
                       Center(
                         child: 
                           Text(
-                            "Seja bem vindo(a) de volta \n$nomeUsuario",
+                            "Seja bem-vindo(a) de volta \n$nomeUsuario",
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w400,
@@ -100,12 +100,13 @@ class _PrincipalViewState extends State<PrincipalView> {
                 ),
                 
             ),
-
+            /*
             floatingActionButton: FloatingActionButton(
               onPressed: () => Navigator.pushNamed(context, '/sobre'),
               backgroundColor: const Color.fromARGB(255, 14, 82, 199),
               child: const Icon(Icons.info_outline),
             ),
+            */
           );
         }
       }

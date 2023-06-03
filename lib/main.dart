@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:glossario_oclusao/view/atividades_view.dart';
+import 'package:glossario_oclusao/view/relatorios_view.dart';
 import 'package:glossario_oclusao/view/sobre_view.dart';
-
 import 'view/principal_view.dart';
 import 'view/login_view.dart';
 import 'view/cadastro_view.dart';
@@ -9,7 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Adicione esta linha
+  WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -25,6 +26,8 @@ Future<void> main() async {
       '/cadastro': (context) => const CadastroView(),
       '/esqueceu_senha': (context) => const EsqueceuSenhaView(),
       '/sobre': (context) => const SobreView(),
+      '/atividades': (context) => const AtividadesView(),
+      '/relatorios': (context) => const RelatoriosView(),
     },
     home: const LoginView(),
   ));

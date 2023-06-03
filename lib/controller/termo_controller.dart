@@ -42,7 +42,8 @@ class CustomSearchDelegate extends SearchDelegate {
     return IconButton(
       icon: const Icon(Icons.arrow_back),
       onPressed: () {
-        close(context, null);
+        Navigator.popUntil(context, (route) => route.settings.name == '/principal');
+
       },
     );
   }

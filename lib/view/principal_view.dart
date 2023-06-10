@@ -63,6 +63,7 @@ class _PrincipalViewState extends State<PrincipalView> {
                 ),
               ],
             ),
+
             body: Container(
               height: double.infinity,
               width: double.infinity,
@@ -94,19 +95,10 @@ class _PrincipalViewState extends State<PrincipalView> {
                             ),
                           ),
                       )
-                      
-                    
                   ),
                 ),
                 
             ),
-            /*
-            floatingActionButton: FloatingActionButton(
-              onPressed: () => Navigator.pushNamed(context, '/sobre'),
-              backgroundColor: const Color.fromARGB(255, 14, 82, 199),
-              child: const Icon(Icons.info_outline),
-            ),
-            */
           );
         }
       }

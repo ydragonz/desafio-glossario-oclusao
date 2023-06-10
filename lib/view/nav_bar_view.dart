@@ -29,8 +29,8 @@ class NavBar extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.assignment),
-            title: const Text("Atividades"),
-            onTap: () => Navigator.pushNamed(context, '/atividades'),
+            title: const Text("Exercicios"),
+            onTap: () => Navigator.pushNamed(context, '/exercicios'),
           ),
           ListTile(
             leading: const Icon(Icons.insert_drive_file),

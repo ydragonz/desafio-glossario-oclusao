@@ -77,7 +77,7 @@ class _LoginViewState extends State<LoginView> {
                   if (value?.isEmpty ?? true) {
                     return 'Por favor, insira seu e-mail';
                   }
-                  if (value != null && !value.endsWith('@sou.unaerp.edu.br') && !value.endsWith('@unaerp.com')) {
+                  if (value != null && !value.endsWith('@sou.unaerp.edu.br') && !value.endsWith('@unaerp.br')) {
                     return 'Por favor, insira um e-mail institucional válido';
                   }
                   return null;

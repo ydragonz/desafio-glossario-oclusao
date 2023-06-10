@@ -113,7 +113,7 @@ class LoginController {
         .createUserWithEmailAndPassword(email: email, password: senha)
         .then((res) {
       //Armazenar informações adicionais no Firestore
-      FirebaseFirestore.instance.collection('alunos').add({
+      FirebaseFirestore.instance.collection('usuarios').add({
         "uid": res.user!.uid.toString(),
         "nome": nome,
         "codigo": codigo,
@@ -150,18 +150,16 @@ class LoginController {
       final user = FirebaseAuth.instance.currentUser;
       if (user != null) {
         final snapshot = await FirebaseFirestore.instance
-            .collection('alunos')
+            .collection('usuarios')
             .where('uid', isEqualTo: user.uid)
             .get();
 
         if (snapshot.docs.isNotEmpty) {
           final aluno = snapshot.docs[0].data();
           usuario['nome'] = aluno['nome'] ?? '';
-          //print('Nome do usuário: ${usuario['nome']}');
         }
 
         usuario['email'] = user.email ?? '';
-        //print('Email do usuário: ${usuario['email']}');
       }
     } catch (e) {
       throw Exception('Erro ao obter dados do usuário: $e');
@@ -169,7 +167,6 @@ class LoginController {
 
     return usuario;
   }
-
 
   String idUsuario() {
     final user = FirebaseAuth.instance.currentUser;
@@ -192,4 +189,22 @@ class LoginController {
       }
     );
   }
+
+  Future<bool> isProf() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final usuario = <String, dynamic>{};
+        usuario['email'] = user.email ?? '';
+        //return usuario['email']?.endsWith('@unaerp.br') ?? false;
+        if(usuario['email'].endsWith('@unaerp.br')){
+          return true;
+        }
+      }
+      return false;
+    } catch (e) {
+      throw Exception('Erro ao obter dados do usuário: $e');
+    }
+  }
+
 }

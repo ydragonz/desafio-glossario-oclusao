@@ -196,10 +196,7 @@ class LoginController {
       if (user != null) {
         final usuario = <String, dynamic>{};
         usuario['email'] = user.email ?? '';
-        //return usuario['email']?.endsWith('@unaerp.br') ?? false;
-        if(usuario['email'].endsWith('@unaerp.br')){
-          return true;
-        }
+        return usuario['email']?.endsWith('@unaerp.br') ?? false;
       }
       return false;
     } catch (e) {

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:glossario_oclusao/controller/login_controller.dart';
 
 class ExercicioRespondView extends StatefulWidget {
-  const ExercicioRespondView({Key? key}) : super(key: key);
+  const ExercicioRespondView({super.key});
 
   @override
-  _ExercicioRespondViewState createState() => _ExercicioRespondViewState();
+  State<ExercicioRespondView> createState() => _ExercicioRespondViewState();
 }
 
 class _ExercicioRespondViewState extends State<ExercicioRespondView> {
@@ -97,7 +97,7 @@ class _ExercicioRespondViewState extends State<ExercicioRespondView> {
                   height: 60,
                   alignment: Alignment.centerLeft,
                   decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 116, 116, 116),
+                    color: Color.fromARGB(182, 116, 116, 116),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   child: SizedBox.expand(

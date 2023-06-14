@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
-
-import 'login_controller.dart';
 
 class RelatorioController {
 
@@ -11,7 +8,6 @@ class RelatorioController {
     String alunoUid,
     bool acertou,
   ) async {
-    carregando(context);
 
     try {
       final relatorioRef = FirebaseFirestore.instance
@@ -51,7 +47,6 @@ class RelatorioController {
     String exercicioUid,
     bool acertou,
   ) async {
-    carregando(context);
 
     try {
       final relatorioRef = FirebaseFirestore.instance
@@ -86,6 +81,64 @@ class RelatorioController {
     }
   }
 
+  Future<Map<String, int>> getRelatorioExercicio(
+    BuildContext context,
+    String exercicioUid,
+  ) async {
+    try {
+      final relatorioRef = FirebaseFirestore.instance
+          .collection('relatorios_exercicios')
+          .doc(exercicioUid);
+
+      final relatorioSnapshot = await relatorioRef.get();
+
+      if (relatorioSnapshot.exists) {
+        final numAcertos = relatorioSnapshot.data()!['acertos'] as int;
+        final numTotal = relatorioSnapshot.data()!['total'] as int;
+        return {
+          'acertos': numAcertos,
+          'total': numTotal,
+        };
+      }
+
+      return {
+        'acertos': 0,
+        'total': 0,
+      };
+    } catch (e) {
+      throw Exception('Ocorreu um erro ao receber dados de exercícios');
+    }
+  }
+
+Future<Map<String, int>> getRelatorioAluno(
+    BuildContext context,
+    String alunoUid,
+    
+  ) async {
+    try {
+      final relatorioRef = FirebaseFirestore.instance
+          .collection('relatorios_alunos')
+          .doc(alunoUid);
+
+      final relatorioSnapshot = await relatorioRef.get();
+
+      if (relatorioSnapshot.exists) {
+        final numAcertos = relatorioSnapshot.data()!['acertos'] as int;
+        final numTotal = relatorioSnapshot.data()!['total'] as int;
+        return {
+          'acertos': numAcertos,
+          'total': numTotal,
+        };
+      }
+
+      return {
+        'acertos': 0,
+        'total': 0,
+      };
+    } catch (e) {
+      throw Exception('Ocorreu um erro ao receber dados do aluno');
+    }
+  }
 
 
   sucesso(context, msg) {

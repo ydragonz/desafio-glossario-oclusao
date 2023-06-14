@@ -4,6 +4,8 @@ import 'package:glossario_oclusao/view/exercicio_detalhes_view.dart';
 import 'package:glossario_oclusao/view/exercicio_edit_view.dart';
 import 'package:glossario_oclusao/view/exercicio_respond_view.dart';
 import 'package:glossario_oclusao/view/exercicios_view.dart';
+import 'package:glossario_oclusao/view/relatorio_aluno_view.dart';
+import 'package:glossario_oclusao/view/relatorio_exercicio_view.dart';
 import 'package:glossario_oclusao/view/relatorios_view.dart';
 import 'package:glossario_oclusao/view/sobre_view.dart';
 import 'view/principal_view.dart';
@@ -36,6 +38,8 @@ Future<void> main() async {
       '/exercicio_add': (context) => const ExercicioAddView(),
       '/exercicio_edit': (context) => const ExercicioEditView(),
       '/relatorios': (context) => const RelatoriosView(),
+      '/relatorio_exercicio': (context) => const RelatorioExercicioView(),
+      '/relatorio_aluno': (context) => const RelatorioAlunoView(),
     },
     home: const LoginView(),
   ));

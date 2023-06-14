@@ -42,8 +42,8 @@ class _CadastroViewState extends State<CadastroView> {
       body: Container(
         padding: const EdgeInsets.only(
           top: 40,
-          left: 25,
-          right: 25,
+          left: 10,
+          right: 10,
         ),
 
         child: Form(
@@ -205,6 +205,7 @@ class _CadastroViewState extends State<CadastroView> {
                   ),
                 ),
               ),
+              
             ],
           ),
         ),

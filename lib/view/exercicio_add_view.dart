@@ -36,12 +36,13 @@ class _ExercicioAddViewState extends State<ExercicioAddView> {
       appBar: AppBar(
         title: const Text('Adicionar exercício'),
         backgroundColor: const Color(0xFF0E52C7),
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         padding: const EdgeInsets.only(
           top: 20,
-          left: 25,
-          right: 25,
+          left: 10,
+          right: 10,
         ),
         child: Form(
           key: _formKey,

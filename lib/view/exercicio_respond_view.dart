@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:glossario_oclusao/controller/login_controller.dart';
+//import 'package:glossario_oclusao/controller/login_controller.dart';
+import '../controller/exercicio_controller.dart';
 
 class ExercicioRespondView extends StatefulWidget {
   const ExercicioRespondView({super.key});
@@ -10,30 +11,41 @@ class ExercicioRespondView extends StatefulWidget {
 
 class _ExercicioRespondViewState extends State<ExercicioRespondView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late LoginController _loginController;
-  bool isProf = false;
-  String? opcaoSelecionada; // Variável para armazenar a alternativa selecionada
+
+  late Map<String, dynamic> exercicio; // Irá receber informações do exercício.
+  late ExercicioController _exercicioController;
+  //late LoginController _loginController;
+
+  String? opcaoSelecionada; // Variável para armazenar a alternativa selecionada.
 
   @override
   void initState() {
     super.initState();
-    _loginController = LoginController();
-    _loadIsProf();
-  }
-
-  Future<void> _loadIsProf() async {
-    final prof = await _loginController.isProf();
-    setState(() {
-      isProf = prof;
-    });
+    
+    _exercicioController = ExercicioController();
+    //_loginController = LoginController();
   }
 
   @override
   Widget build(BuildContext context) {
+    exercicio = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
+    final String alunoUid = exercicio['aluno_uid'];
+    final String exercicioUid = exercicio['exercicio_uid'];
+    final String enunciado = exercicio['enunciado'];
+    final String alternativaA = exercicio['alternativa_a'];
+    final String alternativaB = exercicio['alternativa_b'];
+    final String alternativaC = exercicio['alternativa_c'];
+    final String alternativaD = exercicio['alternativa_d'];
+
+    final String criadoEm = exercicio['criado_em'];
+    final String atualizadoEm = exercicio['atualizado_em'];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF0E52C7),
         title: const Text('Exercício de Oclusão'),
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -41,10 +53,14 @@ class _ExercicioRespondViewState extends State<ExercicioRespondView> {
           key: _formKey,
           child: ListView(
             children: [
-              const SizedBox(height: 8),
               Text(
-                'MDA, 17 anos, sexo feminino, queixa-se de dor no lado esquerdo da face, “barulho no osso” ao abrir a boca e de “queixo grande”. Ao exame clínico, constata-se protrusão da mandíbula e mordida cruzada anterior. A palpação indica sensibilidade dolorosa no músculo masseter esquerdo. Há crepitação ou estalido na articulação temporomandibular. Esse quadro clínico é compatível com o diagnóstico de',
-                style: TextStyle(fontSize: 20),
+                'Criado em: $criadoEm \tAtualizado em: $atualizadoEm',
+                style: const TextStyle(fontSize: 15, color: Color.fromARGB(137, 0, 0, 0)),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                enunciado,
+                style: const TextStyle(fontSize: 20),
                 textAlign: TextAlign.justify,
               ),
               const SizedBox(height: 35),
@@ -56,66 +72,81 @@ class _ExercicioRespondViewState extends State<ExercicioRespondView> {
                 ),
               ),
               const SizedBox(height: 15),
-              buildOption('a', 'oclusão normal com disfunção temporomandibular transitóriaoclusão normal com disfunção temporomandibular transitóriaoclusão normal com disfunção temporomandibular transitóriaoclusão normal com disfunção temporomandibular transitória.'),
+              buildOption('a', alternativaA),
               const Divider(),
-              buildOption('b', 'São Paulo'),
+              buildOption('b', alternativaB),
               const Divider(),
-              buildOption('c', 'Brasília'),
+              buildOption('c', alternativaC),
               const Divider(),
-              buildOption('d', 'Belo Horizonte'),
+              buildOption('d', alternativaD),
               const SizedBox(height: 35),
-              if (!isProf)
-                Container(
-                  height: 60,
-                  alignment: Alignment.centerLeft,
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 41, 109, 228),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: SizedBox.expand(
-                    child: TextButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // Ação a ser realizada quando o botão "Enviar" for pressionado
-                          // Aqui você pode acessar a alternativa selecionada através da variável opcaoSelecionada
-                          print('Alternativa selecionada: $opcaoSelecionada');
+              Container(
+                height: 60,
+                alignment: Alignment.centerLeft,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 41, 109, 228),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                child: SizedBox.expand(
+                  child: TextButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        if (opcaoSelecionada == null) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text('Erro'),
+                              content: const Text('Por favor, selecione uma alternativa.'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          _exercicioController.respostaAdd(context, exercicioUid, alunoUid, opcaoSelecionada);
                         }
-                      },
-                      child: const Text(
-                        "Enviar",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
+                      }
+                    },
+                    child: const Text(
+                      "Enviar",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 20,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 5), 
-                Container(
-                  height: 60,
-                  alignment: Alignment.centerLeft,
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(182, 116, 116, 116),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: SizedBox.expand(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text(
-                        "Voltar",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
+              ),
+              const SizedBox(height: 5), 
+              Container(
+                height: 60,
+                alignment: Alignment.centerLeft,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(182, 116, 116, 116),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                child: SizedBox.expand(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      "Voltar",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 20,
                       ),
                     ),
                   ),
                 ),
+              ),
             ],
           ),
         ),
@@ -143,7 +174,7 @@ class _ExercicioRespondViewState extends State<ExercicioRespondView> {
           ),
           Flexible(
             child: Text(
-              text,
+              "$alternativa) $text",
               style: const TextStyle(fontSize: 18),
             ),
           ),

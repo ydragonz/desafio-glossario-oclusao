@@ -22,7 +22,7 @@ class _PrincipalViewState extends State<PrincipalView> {
   Widget build(BuildContext context) {
 
     return FutureBuilder<Map<String, String>>(
-      future: _loginController.usuarioLogado(),
+      future: _loginController.usuarioLogado(context),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // Exibir um indicador de carregamento enquanto os dados do usuário estão sendo carregados

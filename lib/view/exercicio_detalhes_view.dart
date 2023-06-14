@@ -1,28 +1,56 @@
 import 'package:flutter/material.dart';
 
-class ExercicioDetalhesView extends StatefulWidget {
+class ExercicioDetalhesView extends StatelessWidget {
   const ExercicioDetalhesView({Key? key}) : super(key: key);
 
   @override
-  State<ExercicioDetalhesView> createState() => _ExercicioDetalhesViewState();
-}
-
-class _ExercicioDetalhesViewState extends State<ExercicioDetalhesView> {
-  @override
   Widget build(BuildContext context) {
+
+    //final Map<String, dynamic>? exercicio = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+    final Map<String, dynamic> exercicio = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    /*if (exercicio != null) {
+      final String? criadoEm = exercicio['criado_em'] as String?;
+      final String? atualizadoEm = exercicio['atualizado_em'] as String?;
+      // Resto do código...
+    }*/
+
+    
+    /*final criadoEm = (exercicio['criado_em'] as Timestamp).toDate() as DateTime;
+    final atualizadoEm = (exercicio['atualizado_em'] as Timestamp).toDate() as DateTime;*/
+
+    /*final String enunciado = exercicio['enunciado'];
+    final String alternativaA = exercicio['alternativa_a'];
+    final String alternativaB = exercicio['alternativa_b'];
+    final String alternativaC = exercicio['alternativa_c'];
+    final String alternativaD = exercicio['alternativa_d'];
+    final String alternativaCorreta = exercicio['alternativa_correta'];*/
+    //final DateTime criadoEm = exercicio['criado_em'];
+    //final DateTime atualizadoEm = exercicio['atualizado_em'];
+    final String criadoEm = exercicio['criado_em'];
+    final String atualizadoEm = exercicio['atualizado_em'];
+    //final criadoEmFormatted = _formatDateTime(criadoEm);
+    //final atualizadoEmFormatted = _formatDateTime(atualizadoEm);
+
     return Scaffold(
+
+      
       appBar: AppBar(
         backgroundColor: const Color(0xFF0E52C7),
         title: const Text('Exercício de Oclusão'),
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            const SizedBox(height: 8),
             Text(
-              'MDA, 17 anos, sexo feminino, queixa-se de dor no lado esquerdo da face, “barulho no osso” ao abrir a boca e de “queixo grande”. Ao exame clínico, constata-se protrusão da mandíbula e mordida cruzada anterior. A palpação indica sensibilidade dolorosa no músculo masseter esquerdo. Há crepitação ou estalido na articulação temporomandibular. Esse quadro clínico é compatível com o diagnóstico de',
-              style: TextStyle(fontSize: 20),
+              'Criado em: $criadoEm \tAtualizado em: $atualizadoEm',
+              style: const TextStyle(fontSize: 15, color: Color.fromARGB(137, 0, 0, 0)),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              exercicio['enunciado'], // Utiliza o enunciado do exercício
+              style: const TextStyle(fontSize: 20),
               textAlign: TextAlign.justify,
             ),
             const SizedBox(height: 35),
@@ -34,14 +62,52 @@ class _ExercicioDetalhesViewState extends State<ExercicioDetalhesView> {
               ),
             ),
             const SizedBox(height: 15),
-            buildOption('a', 'oclusão normal com disfunção temporomandibular transitóriaoclusão normal com disfunção temporomandibular transitóriaoclusão normal com disfunção temporomandibular transitóriaoclusão normal com disfunção temporomandibular transitória.'),
+            buildOption('a', exercicio['alternativa_a']), 
             const Divider(),
-            buildOption('b', 'São Paulo'),
+            buildOption('b', exercicio['alternativa_b']), 
             const Divider(),
-            buildOption('c', 'Brasília'),
+            buildOption('c', exercicio['alternativa_c']), 
             const Divider(),
-            buildOption('d', 'Belo Horizonte'),
+            buildOption('d', exercicio['alternativa_d']), 
+            const Divider(),
             const SizedBox(height: 35),
+
+            Container(
+              height: 60,
+              alignment: Alignment.centerLeft,
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 41, 109, 228),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              child: SizedBox.expand(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/exercicio_edit',
+                      arguments: {
+                        'uid': exercicio['uid'],
+                        'enunciado': exercicio['enunciado'],
+                        'alternativa_a': exercicio['alternativa_a'],
+                        'alternativa_b': exercicio['alternativa_b'],
+                        'alternativa_c': exercicio['alternativa_c'],
+                        'alternativa_d': exercicio['alternativa_d'],
+                        'alternativa_correta': exercicio['alternativa_correta'],
+                        'ativo': exercicio['ativo'],
+                      },
+                    );
+                  },
+                  child: const Text(
+                    "Editar",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+            ),
             const SizedBox(height: 5),
             Container(
               height: 60,
@@ -77,7 +143,7 @@ class _ExercicioDetalhesViewState extends State<ExercicioDetalhesView> {
       children: [
         Radio<String>(
           value: alternativa,
-          groupValue: null, // Não é necessário selecionar uma opção nessa tela de visualização
+          groupValue: null,
           onChanged: null,
         ),
         Flexible(

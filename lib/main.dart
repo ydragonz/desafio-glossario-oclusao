@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glossario_oclusao/view/exercicio_add_view.dart';
 import 'package:glossario_oclusao/view/exercicio_detalhes_view.dart';
+import 'package:glossario_oclusao/view/exercicio_edit_view.dart';
 import 'package:glossario_oclusao/view/exercicio_respond_view.dart';
 import 'package:glossario_oclusao/view/exercicios_view.dart';
 import 'package:glossario_oclusao/view/relatorios_view.dart';
@@ -33,6 +34,7 @@ Future<void> main() async {
       '/exercicio_detalhes': (context) => const ExercicioDetalhesView(),
       '/exercicio_respond': (context) => const ExercicioRespondView(),
       '/exercicio_add': (context) => const ExercicioAddView(),
+      '/exercicio_edit': (context) => const ExercicioEditView(),
       '/relatorios': (context) => const RelatoriosView(),
     },
     home: const LoginView(),

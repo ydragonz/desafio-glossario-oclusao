@@ -72,9 +72,7 @@ class CustomSearchDelegate extends SearchDelegate {
               ),
             ),
           ),
-
           const Divider(),
-          
           const SizedBox (
             height: 20,
           ),
@@ -84,8 +82,6 @@ class CustomSearchDelegate extends SearchDelegate {
           ),
         ],
       )
-      
-      
     );
 
   @override

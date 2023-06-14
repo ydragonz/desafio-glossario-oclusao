@@ -1,36 +1,3 @@
-
-/*  Método antigo utilizado no projeto, substituir pela versão com firbease
-class LoginController {
-  static final LoginController _singleton = LoginController._internal();
-
-  factory LoginController() {
-    return _singleton;
-  }
-
-  LoginController._internal();
-
-  final String _emailValido = 'teste@sou.unaerp.edu.br';
-  final String _senhaValida = 'senha123';
-
-  bool _logado = false;
-
-  bool get logado => _logado;
-
-  Future<void> login(String username, String password) async {
-    if (username == _emailValido && password == _senhaValida) {
-      _logado = true;
-    } else {
-      _logado = false;
-      throw Exception('Credenciais inválidas');
-    }
-  }
-
-  Future<void> logout() async {
-    _logado = false;
-  }
-}
-*/
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -44,22 +11,6 @@ class LoginController {
 
       Navigator.pushReplacementNamed(context, '/principal');
     }).catchError((e) {
-      /*showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Erro de autenticação'),
-          content: Text(e.toString()),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-        ),
-      );*/
-      //print(e);
       switch (e.code) {
         case 'invalid-email':
           erro(context, 'O formato do email é inválido.');
@@ -140,8 +91,9 @@ class LoginController {
     });
   }
 
-  Future<Map<String, String>> usuarioLogado() async {
+  Future<Map<String, String>> usuarioLogado(context) async {
     var usuario = {
+      //'uid': '',
       'nome': '',
       'email': '',
     };
@@ -159,13 +111,34 @@ class LoginController {
           usuario['nome'] = aluno['nome'] ?? '';
         }
 
+        //usuario['uid'] = user.uid;
         usuario['email'] = user.email ?? '';
       }
     } catch (e) {
-      throw Exception('Erro ao obter dados do usuário: $e');
+      erro(context, 'Erro ao obter dados do usuário: $e');//throw Exception('Erro ao obter dados do usuário: $e');
     }
 
     return usuario;
+  }
+
+  Future<String> getUidUsuarioLogado() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final snapshot = await FirebaseFirestore.instance
+            .collection('usuarios')
+            .where('uid', isEqualTo: user.uid)
+            .get();
+
+        if (snapshot.docs.isNotEmpty) {
+          final aluno = snapshot.docs[0].data();
+          return aluno['uid'] ?? '';
+        }
+      }
+      return '';
+    } catch (e) {
+      throw Exception('Erro ao obter UID do usuário: $e');
+    }
   }
 
   String idUsuario() {

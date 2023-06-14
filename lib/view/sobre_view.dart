@@ -22,8 +22,8 @@ class _SobreViewState extends State<SobreView> {
       body: Container(
         padding: const EdgeInsets.only(
           top: 40,
-          left: 20,
-          right: 20,
+          left: 15,
+          right: 15,
         ),
 
         child: ListView(

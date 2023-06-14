@@ -34,10 +34,125 @@ class ExercicioController {
       sucesso(context, 'Exercício criado com sucesso.');
       Navigator.pop(context);
       Navigator.of(context).pop();
+      Navigator.pushReplacementNamed(context, '/exercicios');
+      
     } catch (e) {
       erro(context, 'Ocorreu um erro ao criar o exercício.');
       Navigator.of(context).pop();
     }
+  }
+
+  Future<void> exercicioEdit(
+    BuildContext context,
+    String? uid,
+    String enunciado,
+    String alternativaA,
+    String alternativaB,
+    String alternativaC,
+    String alternativaD,
+    String? alternativaCorreta,
+    bool? ativo,
+  ) async {
+    carregando(context);
+
+    try {
+      // Obter a data e hora atuais
+      DateTime now = DateTime.now();
+
+      // Obtenha o documento do exercício a ser editado
+      DocumentReference exercicioRef = FirebaseFirestore.instance.collection('exercicios').doc(uid);
+      // Atualize os dados do exercício
+      await exercicioRef.update({
+        "enunciado": enunciado,
+        "alternativa_a": alternativaA,
+        "alternativa_b": alternativaB,
+        "alternativa_c": alternativaC,
+        "alternativa_d": alternativaD,
+        "alternativa_correta": alternativaCorreta,
+        "atualizado_em": now,
+        "ativo": ativo,
+      });
+
+      sucesso(context, 'Exercício atualizado com sucesso.');
+      Navigator.pop(context);
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
+      Navigator.pushReplacementNamed(context, '/exercicios');
+
+    } catch (e) {
+      erro(context, 'Ocorreu um erro ao atualizar o exercício.');
+      Navigator.of(context).pop();
+    }
+  }
+
+
+  Future<void> respostaAdd(
+    BuildContext context,
+    String exercicioUid,
+    String alunoUid,
+    String? alternativaSelecionada,
+  ) async {
+    carregando(context);
+
+    try {
+
+      if (await isAtivo(exercicioUid)) {
+        DateTime now = DateTime.now();
+        bool? acertou;
+
+        if (isValido(now)) {
+          if (await isCorreto(exercicioUid, alternativaSelecionada)) {
+            acertou = true;
+          } else {
+            acertou = false;
+          }
+          await FirebaseFirestore.instance.collection('respostas').add({
+            "exercicio_uid": exercicioUid,
+            "aluno_uid": alunoUid,
+            "alternativa_selecionada": alternativaSelecionada,
+            "respondido_em": now,
+            "acertou": acertou,
+          });
+
+          sucesso(context, 'Resposta enviada com sucesso');
+          Navigator.pop(context);
+          Navigator.of(context).pop();
+        } else {
+          erro(context, "Você não pode responder a este exercício");
+        }
+      } else {
+        erro(context, "O exercício não está ativo");
+      }
+      
+    } catch (e) {
+      erro(context, 'Ocorreu um erro ao enviar resposta');
+      Navigator.of(context).pop();
+    }
+  }
+
+  Future<bool> isAtivo(String uid) async {
+    final docSnapshot = await FirebaseFirestore.instance.collection('exercicios').doc(uid).get();
+    final exercicioData = docSnapshot.data();
+    if (exercicioData != null) {
+      final bool? ativo = exercicioData['ativo'];
+      return ativo ?? false;
+    }
+    return false;
+  }
+
+  Future<bool> isCorreto(String uid, String? alternativa) async {
+    final docSnapshot = await FirebaseFirestore.instance.collection('exercicios').doc(uid).get();
+    final exercicioData = docSnapshot.data();
+    if (exercicioData != null) {
+      final String? alternativaCorreta = exercicioData['alternativa_correta'];
+      return alternativa == alternativaCorreta;
+    }
+    return false;
+  }
+
+  bool isValido(DateTime date) {
+    String formattedDate = formatDateTime(date);  // Implementar verificação de validade
+    return true;
   }
 
   Future<List<DocumentSnapshot>> getExercicios() async {
@@ -47,8 +162,10 @@ class ExercicioController {
   }
 
   String formatDateTime(DateTime dateTime) {
-    return DateFormat.yMMMMd().format(dateTime);
+    final format = DateFormat('dd/MM');
+    return format.format(dateTime);
   }
+
 
   sucesso(context, msg) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(

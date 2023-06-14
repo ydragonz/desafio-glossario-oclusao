@@ -37,8 +37,8 @@ class _EsqueceuSenhaViewState extends State<EsqueceuSenhaView> {
     body: Container(
       padding: const EdgeInsets.only(
         top: 50,
-        left: 25,
-        right: 25,
+        left: 10,
+        right: 10,
       ),
 
       child: Form(

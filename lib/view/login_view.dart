@@ -31,7 +31,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) => Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(top: 120, left: 25, right: 25,),
+        padding: const EdgeInsets.only(top: 120, left: 10, right: 10),
         color: Colors.white10,
         child: Form(
           key: _formKey,

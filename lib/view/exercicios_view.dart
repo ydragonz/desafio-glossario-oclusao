@@ -15,7 +15,7 @@ class _ExerciciosViewState extends State<ExerciciosView> {
   late LoginController _loginController;
   Future<List<DocumentSnapshot>>? _exerciciosFuture;
   late bool isProf = false;
-  late String alunoUid;
+  late String? alunoUid;
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class _ExerciciosViewState extends State<ExerciciosView> {
   }
 
   Future<void> _loadAlunoUid() async {
-    final String uid = await _loginController.getUidUsuarioLogado();
+    final String? uid = await _loginController.getUidUsuarioLogado();
     setState(() {
       alunoUid = uid;
     });

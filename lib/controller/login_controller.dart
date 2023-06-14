@@ -68,6 +68,7 @@ class LoginController {
         "uid": res.user!.uid.toString(),
         "nome": nome,
         "codigo": codigo,
+        "professor": false,
       });
 
       sucesso(context, 'Usuário criado com sucesso.');
@@ -121,10 +122,10 @@ class LoginController {
     return usuario;
   }
 
-  Future<String> getUidUsuarioLogado() async {
+  Future<String?> getUidUsuarioLogado() async {
     try {
       final user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
+      /*if (user != null) {
         final snapshot = await FirebaseFirestore.instance
             .collection('usuarios')
             .where('uid', isEqualTo: user.uid)
@@ -135,12 +136,51 @@ class LoginController {
           return aluno['uid'] ?? '';
         }
       }
-      return '';
+      return '';*/
+      return user?.uid;
     } catch (e) {
       throw Exception('Erro ao obter UID do usuário: $e');
     }
   }
 
+  Future<List<DocumentSnapshot>> getAlunos() async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('usuarios')
+        .where('professor', isEqualTo: false)  
+        .get();
+    return snapshot.docs;
+  }
+
+/*
+  Future<Map<String, String>> getAlunos(context) async {
+    var usuario = {
+      //'uid': '',
+      'nome': '',
+      'email': '',
+    };
+
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final snapshot = await FirebaseFirestore.instance
+            .collection('usuarios')
+            .get();
+
+        if (snapshot.docs.isNotEmpty) {
+          final aluno = snapshot.docs[0].data();
+          usuario['nome'] = aluno['nome'] ?? '';
+        }
+
+        //usuario['uid'] = user.uid;
+        usuario['email'] = user.email ?? '';
+      }
+    } catch (e) {
+      erro(context, 'Erro ao obter dados do usuário: $e');//throw Exception('Erro ao obter dados do usuário: $e');
+    }
+
+    return usuario;
+  }
+*/
   String idUsuario() {
     final user = FirebaseAuth.instance.currentUser;
     return user!.uid;

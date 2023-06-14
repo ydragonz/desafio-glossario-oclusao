@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:glossario_oclusao/controller/relatorio_controller.dart';
 import 'package:intl/intl.dart';
 
 class ExercicioController {
@@ -56,12 +58,12 @@ class ExercicioController {
     carregando(context);
 
     try {
-      // Obter a data e hora atuais
+
       DateTime now = DateTime.now();
 
-      // Obtenha o documento do exercício a ser editado
+
       DocumentReference exercicioRef = FirebaseFirestore.instance.collection('exercicios').doc(uid);
-      // Atualize os dados do exercício
+
       await exercicioRef.update({
         "enunciado": enunciado,
         "alternativa_a": alternativaA,
@@ -95,7 +97,7 @@ class ExercicioController {
     carregando(context);
 
     try {
-
+      final user = FirebaseAuth.instance.currentUser;
       if (await isAtivo(exercicioUid)) {
         DateTime now = DateTime.now();
         bool? acertou;
@@ -108,15 +110,28 @@ class ExercicioController {
           }
           await FirebaseFirestore.instance.collection('respostas').add({
             "exercicio_uid": exercicioUid,
-            "aluno_uid": alunoUid,
+            "aluno_uid": user!.uid,
             "alternativa_selecionada": alternativaSelecionada,
             "respondido_em": now,
             "acertou": acertou,
           });
 
+          RelatorioController relatorioController = RelatorioController();
+          await relatorioController.gerarRelatorioAluno(
+            context,
+            user!.uid,
+            acertou,
+          );
+
+          await relatorioController.gerarRelatorioExercicio(
+            context,
+            exercicioUid,
+            acertou,
+          );
+
           sucesso(context, 'Resposta enviada com sucesso');
           Navigator.pop(context);
-          Navigator.of(context).pop();
+          Navigator.pushReplacementNamed(context, '/exercicios');
         } else {
           erro(context, "Você não pode responder a este exercício");
         }
@@ -150,10 +165,20 @@ class ExercicioController {
     return false;
   }
 
+
+
+
+
+
   bool isValido(DateTime date) {
     String formattedDate = formatDateTime(date);  // Implementar verificação de validade
-    return true;
+    return true;///////////////////////////////////////////////
   }
+
+
+
+
+
 
   Future<List<DocumentSnapshot>> getExercicios() async {
     final snapshot =

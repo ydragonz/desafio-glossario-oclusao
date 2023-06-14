@@ -15,35 +15,23 @@ class _LoginViewState extends State<LoginView> {
 
   final LoginController _loginController = LoginController();
 
-  /*
-  @override
+  /*@override
   void dispose() {
     _emailController.dispose();
     _senhaController.dispose();
 
     super.dispose();
-  }
-  */
+  }*/
 
-  String? _emailValidator(String? value) {
-    if (value?.isEmpty ?? true) {
-      return 'Por favor, insira seu e-mail';
-    }
-    if (value != null && !value.endsWith('@sou.unaerp.edu.br') && !value.endsWith('@unaerp.com')) {
-      return 'Por favor, insira um e-mail institucional válido';
-    }
-    return null;
-  }
-
-  @override
+  /*@override
   void initState() {
     super.initState();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) => Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(top: 120, left: 40, right: 40,),
+        padding: const EdgeInsets.only(top: 120, left: 10, right: 10),
         color: Colors.white10,
         child: Form(
           key: _formKey,
@@ -85,7 +73,15 @@ class _LoginViewState extends State<LoginView> {
                     fontSize: 20,
                   )
                 ),
-                validator: _emailValidator,
+                validator: (value) {
+                  if (value?.isEmpty ?? true) {
+                    return 'Por favor, insira seu e-mail';
+                  }
+                  if (value != null && !value.endsWith('@sou.unaerp.edu.br') && !value.endsWith('@unaerp.br')) {
+                    return 'Por favor, insira um e-mail institucional válido';
+                  }
+                  return null;
+                }
               ),
 
               const SizedBox (
@@ -145,32 +141,9 @@ class _LoginViewState extends State<LoginView> {
                 child: SizedBox.expand(
                   child: TextButton(
                     onPressed: () {
-                      /*
                       if (_formKey.currentState!.validate()) {
-                        try {
-                          await _loginController.login(_emailController.text, _senhaController.text);
-                          Navigator.pushNamed(context, '/principal');
-                        } catch (e) {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text('Erro de autenticação'),
-                              content: Text(e.toString()),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: const Text('OK'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                )
-                              ],
-                            ),
-                          );
-                        }
-                      }*/
-                      //Navigator.pushNamed(context, '/principal');
-
-                      _loginController.login(context, _emailController.text, _senhaController.text);
+                        _loginController.login(context, _emailController.text, _senhaController.text);
+                      }
                     },
                     child: const Text(
                       "Login",
@@ -183,6 +156,10 @@ class _LoginViewState extends State<LoginView> {
                     
                   ),
                 ),
+              ),
+
+              const SizedBox (
+                height: 5,
               ),
 
               SizedBox(
@@ -203,8 +180,6 @@ class _LoginViewState extends State<LoginView> {
               ),
             ],
           )
-
-            
         ),
       ));
 }

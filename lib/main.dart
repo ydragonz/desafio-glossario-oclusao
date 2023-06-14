@@ -1,8 +1,13 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:glossario_oclusao/view/exercicio_add_view.dart';
+import 'package:glossario_oclusao/view/exercicio_detalhes_view.dart';
+import 'package:glossario_oclusao/view/exercicio_edit_view.dart';
+import 'package:glossario_oclusao/view/exercicio_respond_view.dart';
+import 'package:glossario_oclusao/view/exercicios_view.dart';
+import 'package:glossario_oclusao/view/relatorio_aluno_view.dart';
+import 'package:glossario_oclusao/view/relatorio_exercicio_view.dart';
+import 'package:glossario_oclusao/view/relatorios_view.dart';
 import 'package:glossario_oclusao/view/sobre_view.dart';
-
 import 'view/principal_view.dart';
 import 'view/login_view.dart';
 import 'view/cadastro_view.dart';
@@ -11,6 +16,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -25,6 +32,14 @@ Future<void> main() async {
       '/cadastro': (context) => const CadastroView(),
       '/esqueceu_senha': (context) => const EsqueceuSenhaView(),
       '/sobre': (context) => const SobreView(),
+      '/exercicios': (context) => const ExerciciosView(),
+      '/exercicio_detalhes': (context) => const ExercicioDetalhesView(),
+      '/exercicio_respond': (context) => const ExercicioRespondView(),
+      '/exercicio_add': (context) => const ExercicioAddView(),
+      '/exercicio_edit': (context) => const ExercicioEditView(),
+      '/relatorios': (context) => const RelatoriosView(),
+      '/relatorio_exercicio': (context) => const RelatorioExercicioView(),
+      '/relatorio_aluno': (context) => const RelatorioAlunoView(),
     },
     home: const LoginView(),
   ));
